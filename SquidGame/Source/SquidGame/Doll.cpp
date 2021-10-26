@@ -74,6 +74,8 @@ void ADoll::RedLight()
 	// TODO Check For EleminatePlayers
 	FTimerHandle Handle_SwitchGreenLight;
 	GetWorld()->GetTimerManager().SetTimer(Handle_SwitchGreenLight, this, &ADoll::GreenLight, SwitchToGreenLightDelay);
+
+	OnLightChange.Broadcast(CurrentLight);
 }
 
 void ADoll::GreenLight()
@@ -87,6 +89,8 @@ void ADoll::GreenLight()
 
 	FTimerHandle Handle_PlayGreenLightRedLightSong;
 	GetWorld()->GetTimerManager().SetTimer(Handle_PlayGreenLightRedLightSong, this, &ADoll::PlayGreenLightRedLightSong, 0.8f);
+
+	OnLightChange.Broadcast(CurrentLight);
 }
 
 TArray<AActor*> ADoll::ScanningForEleminatePlayers()

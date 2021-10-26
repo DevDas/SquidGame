@@ -2,7 +2,7 @@
 
 
 #include "SquidGame/AI/BTD_IsGreenLight.h"
-#include "SquidGame/SquidGameCharacter.h"
+#include "SquidGame/AI/AICRedLightGreenLight.h"
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "AIController.h"
 #include "Kismet/KismetSystemLibrary.h"
@@ -17,7 +17,8 @@ bool UBTD_IsGreenLight::CalculateRawConditionValue(UBehaviorTreeComponent& Owner
 	bool bSuccess = Super::CalculateRawConditionValue(OwnerComp, NodeMemory);
 	if (!bSuccess) return false;
 
-	ASquidGameCharacter* AIPawn = Cast<ASquidGameCharacter>(OwnerComp.GetAIOwner()->GetPawn());
-	if (!AIPawn) return false;
-	return true;
+	AAICRedLightGreenLight* RedLightGreenLightController = Cast<AAICRedLightGreenLight>(OwnerComp.GetAIOwner());
+	if (!RedLightGreenLightController) return false;
+
+	return RedLightGreenLightController->IsGreenLight();
 }

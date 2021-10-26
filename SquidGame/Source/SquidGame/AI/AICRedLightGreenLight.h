@@ -4,6 +4,7 @@
 
 #include "CoreMinimal.h"
 #include "SquidGame/AI/SquidBaseAIBase.h"
+#include "SquidGame/Doll.h"
 #include "AICRedLightGreenLight.generated.h"
 
 /**
@@ -18,6 +19,20 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+	bool IsGreenLight();
+
+	UFUNCTION()
+	void LightChanged(ELightType LightType);
+
+	void SetAsGreenLight();
+	void SetAsRedLight();
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI", meta = (ClampMin = "0.0", ClampMax = "3.0"))
+		float RedLightDelayRange = 1.f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI", meta = (ClampMin = "0.0", ClampMax = "3.0"))
+		float GreenLightDelayRange = 1.f;
+
 protected:
 
 	virtual void BeginPlay() override;
@@ -30,4 +45,7 @@ protected:
 
 	UPROPERTY(EditAnywhere, BlueprintReadOnly, Category = "AI")
 		class UBlackboardData* BlackBoardData;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "AICondition")
+		bool bIsGreenLight = false;
 };

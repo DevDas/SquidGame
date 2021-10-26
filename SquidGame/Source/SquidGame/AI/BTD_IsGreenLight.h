@@ -15,6 +15,7 @@ class SQUIDGAME_API UBTD_IsGreenLight : public UBTDecorator
 	GENERATED_BODY()
 	
 public:
+
 	UBTD_IsGreenLight();
 
 protected:

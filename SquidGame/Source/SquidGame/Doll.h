@@ -14,6 +14,7 @@ enum ELightType
 	GreenLight
 };
 
+DECLARE_DYNAMIC_MULTICAST_DELEGATE_OneParam(FOnLightChange, ELightType, LightType);
 
 UCLASS()
 class SQUIDGAME_API ADoll : public AActor
@@ -79,4 +80,7 @@ public:
 
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		TEnumAsByte<ELightType> CurrentLight = ELightType::None;
+
+	UPROPERTY(BlueprintAssignable)
+	FOnLightChange OnLightChange;
 };

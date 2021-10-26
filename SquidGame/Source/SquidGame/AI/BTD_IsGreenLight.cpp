@@ -20,5 +20,14 @@ bool UBTD_IsGreenLight::CalculateRawConditionValue(UBehaviorTreeComponent& Owner
 	AAICRedLightGreenLight* RedLightGreenLightController = Cast<AAICRedLightGreenLight>(OwnerComp.GetAIOwner());
 	if (!RedLightGreenLightController) return false;
 
+	if (RedLightGreenLightController->IsGreenLight())
+	{
+		UE_LOG(LogTemp, Warning, TEXT("True"))
+	}
+	else
+	{
+		UE_LOG(LogTemp, Warning, TEXT("False"))
+	}
+
 	return RedLightGreenLightController->IsGreenLight();
 }

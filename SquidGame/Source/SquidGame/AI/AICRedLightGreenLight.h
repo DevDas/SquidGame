@@ -19,6 +19,7 @@ public:
 
 	virtual void Tick(float DeltaTime) override;
 
+	UFUNCTION(BlueprintCallable)
 	bool IsGreenLight();
 
 	UFUNCTION()

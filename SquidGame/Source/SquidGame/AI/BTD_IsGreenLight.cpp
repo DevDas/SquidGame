@@ -14,20 +14,9 @@ UBTD_IsGreenLight::UBTD_IsGreenLight()
 
 bool UBTD_IsGreenLight::CalculateRawConditionValue(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const
 {
-	bool bSuccess = Super::CalculateRawConditionValue(OwnerComp, NodeMemory);
-	if (!bSuccess) return false;
+	UE_LOG(LogTemp, Warning, TEXT("Calling"))
 
 	AAICRedLightGreenLight* RedLightGreenLightController = Cast<AAICRedLightGreenLight>(OwnerComp.GetAIOwner());
-	if (!RedLightGreenLightController) return false;
 
-	if (RedLightGreenLightController->IsGreenLight())
-	{
-		UE_LOG(LogTemp, Warning, TEXT("True"))
-	}
-	else
-	{
-		UE_LOG(LogTemp, Warning, TEXT("False"))
-	}
-
-	return RedLightGreenLightController->IsGreenLight();
+	return false;//RedLightGreenLightController && RedLightGreenLightController->IsGreenLight();
 }

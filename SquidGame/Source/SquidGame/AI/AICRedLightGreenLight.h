@@ -20,7 +20,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION(BlueprintPure)
-	bool IsGreenLight();
+	bool IsGreenLight() const;
 
 	UFUNCTION()
 	void LightChanged(ELightType LightType);

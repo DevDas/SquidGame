@@ -8,6 +8,7 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/Controller.h"
 #include "GameFramework/SpringArmComponent.h"
+#include "Kismet/GamePlayStatics.h"
 
 //////////////////////////////////////////////////////////////////////////
 // ASquidGameCharacter
@@ -137,4 +138,30 @@ void ASquidGameCharacter::MoveRight(float Value)
 		// add movement in that direction
 		AddMovementInput(Direction, Value);
 	}
+}
+
+void ASquidGameCharacter::EleminateFromGame(float EleminationDelayParam)
+{
+	if (!bIsEliminated)
+	{
+		FTimerHandle Handle_ProcessElemination;
+		GetWorld()->GetTimerManager().SetTimer(Handle_ProcessElemination, this, &ASquidGameCharacter::ProcessEleminate, EleminationDelayParam);
+		bIsEliminated = true;
+	}
+}
+
+void ASquidGameCharacter::ProcessEleminate()
+{
+	if (DeathAnimation)
+	{
+		GetCapsuleComponent()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GetMesh()->SetCollisionEnabled(ECollisionEnabled::NoCollision);
+		GetMesh()->PlayAnimation(DeathAnimation, false);
+		UGameplayStatics::PlaySound2D(this, GunSound);
+	}
+}
+
+bool ASquidGameCharacter::IsEleminated() const
+{
+	return bIsEliminated;
 }

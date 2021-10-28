@@ -68,5 +68,23 @@ public:
 	FORCEINLINE class USpringArmComponent* GetCameraBoom() const { return CameraBoom; }
 	/** Returns FollowCamera subobject **/
 	FORCEINLINE class UCameraComponent* GetFollowCamera() const { return FollowCamera; }
+
+	UFUNCTION(BlueprintCallable)
+		void EleminateFromGame(float EleminationDelayParam);
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeathEvents")
+		class UAnimationAsset* DeathAnimation;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "DeathEvents")
+		class USoundBase* GunSound = nullptr;
+
+	UFUNCTION(BlueprintPure)
+		bool IsEleminated() const;
+
+private:
+
+	bool bIsEliminated = false;
+
+	void ProcessEleminate();
 };
 

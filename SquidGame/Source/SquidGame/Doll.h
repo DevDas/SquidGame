@@ -72,6 +72,12 @@ public:
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		float SwitchToGreenLightDelay = 2.f;
 
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.05", ClampMax = "1.0"))
+		float ScanningForEleminationDelay = 0.5f;
+
+	UPROPERTY(EditAnywhere, BlueprintReadWrite, meta = (ClampMin = "0.1", ClampMax = "2.0"))
+		float EleminationDelay = 0.5f;
+
 	UPROPERTY(EditAnywhere, BlueprintReadWrite)
 		FRotator DefaultRotation;
 
@@ -83,4 +89,8 @@ public:
 
 	UPROPERTY(BlueprintAssignable)
 	FOnLightChange OnLightChange;
+
+private:
+
+	float CurrentEleminationProcessDelay  = 0.1f;
 };

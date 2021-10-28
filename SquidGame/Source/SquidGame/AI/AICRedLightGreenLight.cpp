@@ -59,14 +59,16 @@ void AAICRedLightGreenLight::LightChanged(ELightType LightType)
 void AAICRedLightGreenLight::SetAsGreenLight()
 {
 	bIsGreenLight = true;
+	GetBlackboardComponent()->SetValueAsBool(FName("IsGreenLight"), true);
 }
 
 void AAICRedLightGreenLight::SetAsRedLight()
 {
 	bIsGreenLight = false;
+	GetBlackboardComponent()->SetValueAsBool(FName("IsGreenLight"), false);
 }
 
-bool AAICRedLightGreenLight::IsGreenLight()
+bool AAICRedLightGreenLight::IsGreenLight() const
 {
 	return bIsGreenLight;
 }

@@ -6,6 +6,7 @@
 #include "BehaviorTree/BehaviorTreeComponent.h"
 #include "AIController.h"
 #include "Kismet/KismetSystemLibrary.h"
+#include "BehaviorTree/BlackboardComponent.h"
 
 UBTD_IsGreenLight::UBTD_IsGreenLight()
 {
@@ -14,9 +15,5 @@ UBTD_IsGreenLight::UBTD_IsGreenLight()
 
 bool UBTD_IsGreenLight::CalculateRawConditionValue(UBehaviorTreeComponent& OwnerComp, uint8* NodeMemory) const
 {
-	UE_LOG(LogTemp, Warning, TEXT("Calling"))
-
-	AAICRedLightGreenLight* RedLightGreenLightController = Cast<AAICRedLightGreenLight>(OwnerComp.GetAIOwner());
-
-	return false;//RedLightGreenLightController && RedLightGreenLightController->IsGreenLight();
+	return OwnerComp.GetBlackboardComponent()->GetValueAsBool(FName("IsGreenLight"));
 }
